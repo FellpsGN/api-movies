@@ -30,6 +30,14 @@ class UsersController {
         });
 
         return res.status(201).json();
-    }
+    };
+
+    async getUser(req, res) {
+        const { user_id } = req.params;
+
+        const [user] = await knex("users").select("user_name", "user_email", "user_avatar").where({user_id});
+
+        res.status(200).json(user);
+    };
 }
 module.exports = UsersController;
