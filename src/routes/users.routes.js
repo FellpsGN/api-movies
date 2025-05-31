@@ -7,5 +7,6 @@ const usersRoutes = Router();
 usersRoutes.post("/", usersController.create);
 usersRoutes.get("/:user_id", usersController.getUser);
 usersRoutes.put("/:user_id", usersController.update);
+usersRoutes.delete("/:user_id", usersController.delete);
 
 module.exports = usersRoutes;

@@ -83,9 +83,23 @@ class UsersController {
                 .where({ user_id });
 
             return res.status(200).json();
-        }
-
-
+        };
     };  
+
+    async delete(req, res) {
+        const { user_id } = req.params;
+        const { user_email } = req.body;
+
+        const [user] = await knex("users").where({user_id, user_email});
+        
+        if(!user) {
+            throw new AppError("User not found.", 404);
+        };
+
+        await knex("users").delete().where({user_id, user_email});
+
+        return res.status(204).json();
+        
+    }
 }
 module.exports = UsersController;
