@@ -50,6 +50,13 @@ class MoviesController {
             });
         return res.status(200).json(notes);
     };
+
+    async delete(req, res) {
+        const { movie_note_id } = req.params;
+        await knex("movies_notes").delete().where({movie_note_id});
+
+        return res.status(204).json();
+    };
 }
 
 module.exports = MoviesController;

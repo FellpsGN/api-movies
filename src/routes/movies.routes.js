@@ -6,5 +6,6 @@ const moviesRoutes = Router();
 
 moviesRoutes.post("/:user_id", moviesController.create);
 moviesRoutes.get("/:user_id", moviesController.getMovieNotes);
+moviesRoutes.delete("/:movie_note_id", moviesController.delete);
 
 module.exports = moviesRoutes;
