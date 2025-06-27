@@ -33,7 +33,7 @@ class UsersController {
     };
 
     async getUser(req, res) {
-        const { user_id } = req.params;
+        const user_id = req.user.user_id;
 
         const [user] = await knex("users").select("user_name", "user_email", "user_avatar").where({user_id});
 
@@ -41,7 +41,7 @@ class UsersController {
     };
 
     async update(req, res) {
-        const { user_id } = req.params;
+        const user_id = req.user.user_id;
         const { user_name, user_email, user_pass, old_pass, user_avatar } = req.body;
 
         const [user] = await knex("users").where({user_id});
@@ -87,7 +87,7 @@ class UsersController {
     };  
 
     async delete(req, res) {
-        const { user_id } = req.params;
+        const user_id = req.user.user_id;
         const { user_email } = req.body;
 
         const [user] = await knex("users").where({user_id, user_email});
