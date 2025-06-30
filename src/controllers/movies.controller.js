@@ -1,9 +1,14 @@
 const knex = require("../database/knex/index.js");
+const AppError = require("../utils/AppError.js");
 
 class MoviesController {
     async create(req, res) {
-        const { user_id } = req.params;
+        const user_id = req.user.user_id;
         const { movie_note_title, movie_title, movie_note_description, movie_note_rating, tags } = req.body;
+
+        if(movie_note_rating < 0 || movie_note_rating > 5) {
+            throw new AppError("Note rating must be between 0 and 5", 409);
+        };
 
         const [movie_note_id] = await knex("movies_notes").insert({
             movie_note_title,
@@ -27,7 +32,7 @@ class MoviesController {
     };
 
     async getMovieNotes(req, res) {
-        const { user_id } = req.params;
+        const user_id = req.user.user_id;
         const { movie_note_title, movie_title, tags } = req.query;
         
         const [notes] = await knex({mt: "movies_tags"})
@@ -53,7 +58,15 @@ class MoviesController {
 
     async delete(req, res) {
         const { movie_note_id } = req.params;
-        await knex("movies_notes").delete().where({movie_note_id});
+        const user_id = req.user.user_id;
+        
+        const [movie] = await knex("movies_notes").where({movie_note_id, user_id});
+        
+        if(!movie) {
+            throw new AppError("Movie not found", 404);
+        };
+
+        await knex("movies_notes").delete().where({movie_note_id, user_id});
 
         return res.status(204).json();
     };
