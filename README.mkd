@@ -1,0 +1,169 @@
+# 📝 Movies API
+
+A RESTful API for managing **users**, **movies notes** and **tags** — built with **Node.js**, **Express** and **SQLite**, using **Knex.js** for database manipulation, **JWT** for authenticating users.
+
+---
+
+## 🚀 Features
+
+- Create users
+- Create movies notes with associated tags
+- Get movies notes by user
+- Filter movie notes by title and tags
+- Get all tags for a user
+- Delete movies notes
+
+---
+
+## 📁 How to run
+
+1. **Clone the repository**
+```bash
+git clone https://github.com/FellpsGN/api-movies.git
+```
+
+2. **Navigate to the project folder**
+```bash
+cd api-movies
+```
+
+3. **Install dependencies**
+```bash
+npm install
+```
+
+4. **Start Server**
+```bash
+npm run dev
+```
+---
+
+## 📦 Technologies Used
+
+- Node.js
+- Express.js
+- SQLite
+- Knex.js
+- JWT
+- Multer
+- Swagger
+
+---
+
+## 📁 Project Structure
+
+```bash
+├── knexfile.js
+├── package.json
+├── package-lock.json
+├── README.mkd
+├── .gitignore
+├── tmp
+│   ├── .gitkeep
+│   └── uploads
+├── src
+│   ├── config
+│   │   ├── auth.js
+│   │   ├── swagger.js
+│   │   └── upload.js
+│   ├── controllers
+│   │   ├── users.controller.js
+│   │   ├── movies.controller.js
+│   │   ├── sessions.controller.js
+│   │   ├── userAvatar.controller.js
+│   │   └── tags.controller.js
+│   ├── database
+│   │   └── knex
+│   │       ├── migrations
+│   │       └── index.js
+│   ├── middlewares
+│   │   └── ensureAuthenticated.js
+│   ├── providers
+│   │   └── DiskStorage.js
+│   ├── routes
+│   │   ├── index.js
+│   │   ├── users.routes.js
+│   │   ├── movies.routes.js
+│   │   ├── sessions.routes.js
+│   │   └── tags.routes.js
+│   ├── utils
+│   │   └── AppError.js
+│   └── server.js
+```
+
+# 📌 API Endpoints
+
+![Endpoints](./.github/swagger_routes.png)
+
+## 🧑‍💻 Users
+
+- POST - `/users` | Create User
+```json
+{
+    "user_name": "Woody lightyear",
+    "user_email": "buzz.lightyear@email.com",
+    "user_pass": "toInfinityAndBeyond"
+}
+```
+
+- PUT  - `/users` | Update User (name & email)
+```json
+{
+    "name": "Buzz Lightyear",
+    "email": "buzz.lightyear@email.com"
+}
+```
+
+- PUT  - `/users` | Update User (name & email & password)
+```json
+{
+    "user_name": "Buzz Lightyear",
+    "user_email": "buzz.lightyear@email.com",
+    "user_pass": "iAmBuzzLightyear",
+    "old_pass": "toInfinityAndBeyond"
+}
+```
+
+- PATCH - `/users/avatar` | Update User Avatar
+
+- GET  - `/users` | Get user By Id
+
+- DELETE - `/users` | Delete user authenticated
+```json
+{
+    "user_email": "buzz.lightyear@email.com"
+}
+```
+
+## 🏷️ Sessions
+
+- POST - `/sessions` | Create JWT Token
+```json
+{
+  "user_email": "fulano.silva@email.com",
+  "user_pass": "fulano12345"
+}
+```
+
+## 🗒️ Movies
+- POST - `/movies` | Create movie By User ID
+```json
+{
+  "movie_note_title": "Harry and your glasses",
+  "movie_title": "Harry Potter and the Prisioner of Azkaban",
+  "movie_note_description": "They should change the Harry's glasses when..",
+  "movie_note_rating": 5,
+  "tags": ["Fantasy", "Adventure"]
+}
+```
+
+- GET - `/movies` | Get Movies Notes By User
+
+- DELETE - `/:movie_note_id` | Delete Movie Note By ID
+
+## 🏷️ Tags
+
+- GET - `/tags` | Get All Tags By User ID
+
+# 🧪 Tests
+You can test the routes using Postman, Insomnia, or another HTTP client.
