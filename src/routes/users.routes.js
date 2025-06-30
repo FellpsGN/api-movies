@@ -27,10 +27,13 @@ const usersAvatarController = new UserAvatarController();
  *                  properties:
  *                      user_name:
  *                          type: string
+ *                          example: "Fulano"
  *                      user_email: 
  *                          type: string
+ *                          example: "fulano.silva@email.com"
  *                      user_pass:
  *                          type: string
+ *                          example: "fulano12345"
  * 
  *     responses:
  *       201:

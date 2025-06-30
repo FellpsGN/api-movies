@@ -20,8 +20,10 @@ const sessionsController = new SessionsController();
  *                  properties:
  *                      user_email: 
  *                          type: string
+ *                          example: "fulano.silva@email.com"
  *                      user_pass: 
  *                          type: string
+ *                          example: "fulano12345"
  *     responses:
  *       200:
  *          description: Created Token
