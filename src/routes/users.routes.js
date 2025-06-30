@@ -77,12 +77,16 @@ usersRoutes.get("/", ensureAuthenticated, usersController.getUser);
  *                  properties:
  *                      user_name:
  *                          type: string
+ *                          example: "Fulano"
  *                      user_email: 
  *                          type: string
+ *                          example: "fulano.silva@email.com"
  *                      user_pass:
  *                          type: string
+ *                          example: "changePassFulano123"
  *                      old_pass:
  *                          type: string
+ *                          example: "fulano12345"
  * 
  *      responses:
  *          200:
@@ -143,6 +147,7 @@ usersRoutes.patch("/avatar", ensureAuthenticated, upload.single("avatar"), users
  *                  properties:
  *                      user_email:
  *                          type: string
+ *                          example: "fulano.silva@email.com"
  *      responses:
  *          204: 
  *              description: Deleted User
